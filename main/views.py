@@ -14,4 +14,4 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse('About pageы')
+    return HttpResponse('About page')
