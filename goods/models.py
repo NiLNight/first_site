@@ -30,4 +30,4 @@ class Products(models.Model):
         verbose_name_plural = 'Продукты'
 
     def __str__(self):
-        return f'{self.name}Количество - {self.quantity}'
+        return f'{self.name} Количество - {self.quantity}'
