@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from carts.models import Cart
@@ -23,5 +24,7 @@ def cart_change(request, product_slug):
     ...
 
 
-def cart_remove(request, product_slug):
-    ...
+def cart_remove(request, cart_id):
+    cart = Cart.objects.get(id=cart_id)
+    cart.delete()
+    return redirect(request.META['HTTP_REFERER'])
