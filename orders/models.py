@@ -22,12 +22,13 @@ class Order(models.Model):
     requires_delivery = models.BooleanField(default=False, verbose_name='Требуется доставка')
     delivery_address = models.TextField(null=True, blank=True, verbose_name='Адрес доставки')
     payment_on_get = models.BooleanField(default=False, verbose_name='Оплата при получении')
+    is_paid = models.BooleanField(default=False, verbose_name="Оплачено")
     status = models.CharField(max_length=50, default='В обработке', verbose_name='Статус заказа')
 
     class Meta:
         db_table = 'order'
-        verbose_name = ''
-        verbose_name_plural = ''
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
     def __str__(self):
         return f'Заказ № {self.pk} | Покупатель {self.user.first_name} {self.user.last_name}'
@@ -44,8 +45,8 @@ class OrderItem(models.Model):
 
     class Meta:
         db_table = 'order_item'
-        verbose_name = ''
-        verbose_name_plural = ''
+        verbose_name = 'Проданные товары'
+        verbose_name_plural = 'Проданные товары'
 
     objects = OrderitemQuerySet.as_manager()
 
