@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load cache %}
 {% load goods_tags %}
 
 <head>
@@ -99,11 +100,13 @@
                          height="16">
                 </button>
                 <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                    {% tag_categories as categories %}
-                    {% for category in categories %}
-                        <li><a class="dropdown-item text-white"
-                               href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a></li>
-                    {% endfor %}
+                    {% cache 60 catalog_categories %}
+                        {% tag_categories as categories %}
+                        {% for category in categories %}
+                            <li><a class="dropdown-item text-white"
+                                   href="{% url 'catalog:index' category.slug %}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    {% endcache %}
                 </ul>
             </div>
             <!-- Значек корзины, вызывает модальное окно -->
